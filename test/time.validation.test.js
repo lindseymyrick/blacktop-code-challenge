@@ -15,6 +15,16 @@ describe('time validation', () => {
             expect(closeToNow(timestamp)).toBe(true);
             done();
         });
+        test('it returns true if passed a time 25 seconds in the future', (done) => {
+            const timestamp = moment().add( 25, 's');
+            expect(closeToNow(timestamp)).toBe(true);
+            done();
+        });
+        test('it returns true if passed a time 25 seconds in the past', (done) => {
+            const timestamp = moment().subtract(25, 's');
+            expect(closeToNow(timestamp)).toBe(true);
+            done();
+        });
         test('it returns false if passed a time ten years ago', (done) => {
             const timestamp = '2010-07-01T16:03:18.021Z'; 
             expect(closeToNow(timestamp)).toBe(false);
@@ -23,6 +33,11 @@ describe('time validation', () => {
         test('it returns false if passed a time 40 seconds ago', (done) => {
             const timestamp = moment().subtract(40, 's');
             expect(closeToNow(timestamp)).toBe(false);
+            done();
+        });
+        test('it returns true if passed a non-stringified date', (done) => {
+            const timestamp = new Date();
+            expect(closeToNow(timestamp)).toBe(true);
             done();
         });
        
