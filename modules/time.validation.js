@@ -10,7 +10,14 @@ const moment = require('moment-timezone');
  * @returns {Boolean} whether the timestamp is within 30 seconds of now
  */
 function closeToNow(timestamp) {
-    // YOUR CODE HERE
+    let thirtySecsBeforeMoment = moment().subtract(30, 's');
+    let thirtySecsAfterMoment = moment().add(30, 's');
+    //isBetween method checks if moment is between two other moments 
+    if (moment(timestamp).isBetween(thirtySecsBeforeMoment, thirtySecsAfterMoment, 'seconds')) {
+        return true
+    } else {
+        return false
+    }
 }
 
 /**
