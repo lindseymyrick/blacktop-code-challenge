@@ -15,12 +15,12 @@ describe('time validation', () => {
             expect(closeToNow(timestamp)).toBe(true);
             done();
         });
-        test('it returns true if passed a time 25 seconds in the future', (done) => {
+        test('it returns true if passed a time 29 seconds in the future', (done) => {
             const timestamp = moment().add( 25, 's');
             expect(closeToNow(timestamp)).toBe(true);
             done();
         });
-        test('it returns true if passed a time 25 seconds in the past', (done) => {
+        test('it returns true if passed a time 29 seconds in the past', (done) => {
             const timestamp = moment().subtract(25, 's');
             expect(closeToNow(timestamp)).toBe(true);
             done();
@@ -35,13 +35,29 @@ describe('time validation', () => {
             expect(closeToNow(timestamp)).toBe(false);
             done();
         });
-        test('it returns true if passed a non-stringified date', (done) => {
+        test('it returns false if passed a time 40 seconds in the future', (done) => {
+            const timestamp = moment().add(40, 's');
+            expect(closeToNow(timestamp)).toBe(false);
+            done();
+        });
+        test('it returns false if passed a time 30 seconds ago', (done) => {
+            const timestamp = moment().subtract(40, 's');
+            expect(closeToNow(timestamp)).toBe(false);
+            done();
+        });
+        test('it returns false if passed a time 30 seconds in the future', (done) => {
+            const timestamp = moment().add(40, 's');
+            expect(closeToNow(timestamp)).toBe(false);
+            done();
+        });
+        test('it returns true if passed a non-ISOstringified version of the current time', (done) => {
             const timestamp = new Date();
             expect(closeToNow(timestamp)).toBe(true);
             done();
         });
        
     });
+
     describe('closest date', () => {
         test('it returns the previous day if before noon CST time (input, UST time)', (done) => {
             const inputTime = '2020-07-01T16:03:18.021Z'
@@ -68,19 +84,32 @@ describe('time validation', () => {
             done();
         });
     });
+
     describe('format timestamp', () => {
-        test('it returns a formatted timestamp', (done) => {
+        test('it returns a formatted timestamp (CST)', (done) => {
             const inputTime = '2020-07-01T16:03:18.021Z'
             const expectedOutput = 'July 1st, 2020 at 11:03 am';
             expect(formatTimestamp(inputTime, 'US/Central')).toBe(expectedOutput);
             done();
         });
-        test('it returns a formatted timestamp when input is day after in UST time', (done) => {
+        test('it returns a formatted timestamp (EST)', (done) => {
+            const inputTime = '2020-07-01T16:03:18.021Z'
+            const expectedOutput = 'July 1st, 2020 at 12:03 pm';
+            expect(formatTimestamp(inputTime, 'America/New_York')).toBe(expectedOutput);
+            done();
+        });
+        test('it returns a formatted timestamp when input is day after in UST time (PST)', (done) => {
             const inputTime = '2020-07-02T02:03:18.021Z'
             const expectedOutput = 'July 1st, 2020 at 7:03 pm';
             expect(formatTimestamp(inputTime, 'America/Los_Angeles')).toBe(expectedOutput);
             done();
         });
-        
+        test('it returns a formatted timestamp when input is a different string format', (done) => {
+            const inputTime = 'Tuesday, 14-Jul-20 13:57:10 UTC'
+            const expectedOutput = 'July 14th, 2020 at 6:57 am';
+            expect(formatTimestamp(inputTime, 'America/Los_Angeles')).toBe(expectedOutput);
+            done();
+        });
+       
     });
 });
