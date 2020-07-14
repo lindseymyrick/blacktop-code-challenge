@@ -34,10 +34,12 @@ function closeToNow(timestamp) {
 function closestDate(timestamp) {
     //converts from other time zones to CST
     timeStampCST = moment(timestamp).tz('America/Chicago').format('H')
+    dayBefore = moment(timestamp).tz('America/Chicago').subtract(1, 'd').format("YYYY-MM-DD");
+    dayOf = moment(timestamp).format("YYYY-MM-DD");
     if (timeStampCST < 12) {
-        return moment(timestamp).tz('America/Chicago').subtract(1,'d').format("YYYY-MM-DD");
+        return dayBefore;
     } else {
-        return moment(timestamp).format("YYYY-MM-DD");
+        return dayOf;
     }
   
 }
