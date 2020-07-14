@@ -43,25 +43,30 @@ describe('time validation', () => {
        
     });
     describe('closest date', () => {
-        test('it returns the previous day if before noon CST (UST time)', (done) => {
+        test('it returns the previous day if before noon CST time (input, UST time)', (done) => {
             const inputTime = '2020-07-01T16:03:18.021Z'
             const expectedOutput = '2020-06-30';
             expect(closestDate(inputTime)).toBe(expectedOutput);
             done();
         });
-        test('it returns the previous day if before noon CST', (done) => {
+        test('it returns the current day if on or after noon CST time (input, UST time)', (done) => {
             const inputTime = '2020-07-01T17:03:18.021Z'
             const expectedOutput = '2020-07-01';
             expect(closestDate(inputTime)).toBe(expectedOutput);
             done();
         });
-        test('it returns the previous day if before noon CST', (done) => {
+        test('it returns the current day if on or after noon CST Time (input, CST time)', (done) => {
             const inputTime = '2020-07-01T12:03:18.021-05:00'
             const expectedOutput = '2020-07-01';
             expect(closestDate(inputTime)).toBe(expectedOutput);
             done();
         });
-        // YOUR CODE HERE
+        test('it returns the current day in CST time when input is day after UST time', (done) => {
+            const inputTime = '2020-07-01T02:03:18.021Z'
+            const expectedOutput = '2020-06-30';
+            expect(closestDate(inputTime)).toBe(expectedOutput);
+            done();
+        });
     });
     // describe('format timestamp', () => {
     //     test('it returns a formatted timestamp', (done) => {

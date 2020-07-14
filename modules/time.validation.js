@@ -32,9 +32,11 @@ function closeToNow(timestamp) {
  * @returns {String} calulated date in the format 'YYYY-MM-DD'
  */
 function closestDate(timestamp) {
-    //converts from other time zones to CST
+    //converts timezone to CST and formats in hour
     timeStampCST = moment(timestamp).tz('America/Chicago').format('H')
+    //converts timezone to CST, subtracts one day, and formats correctly
     dayBefore = moment(timestamp).tz('America/Chicago').subtract(1, 'd').format("YYYY-MM-DD");
+    //converts timezone to CST and formats correctly 
     dayOf = moment(timestamp).format("YYYY-MM-DD");
     if (timeStampCST < 12) {
         return dayBefore;
