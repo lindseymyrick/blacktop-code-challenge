@@ -56,7 +56,8 @@ function closestDate(timestamp) {
  * @returns {String} calulated date in the format 'MMMM Do, YYYY [at] h:mm a'
  */
 function formatTimestamp(timestamp, timezone) {
-    // YOUR CODE HERE
+    let formattedTimestamp = moment(timestamp).tz(timezone).format('MMMM Do, YYYY [at] h:mm a');
+    return formattedTimestamp; 
 }
 
 module.exports = {

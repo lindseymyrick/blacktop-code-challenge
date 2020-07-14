@@ -68,13 +68,19 @@ describe('time validation', () => {
             done();
         });
     });
-    // describe('format timestamp', () => {
-    //     test('it returns a formatted timestamp', (done) => {
-    //         const inputTime = '2020-07-01T16:03:18.021Z'
-    //         const expectedOutput = 'July 1st, 2020 at 11:03 am';
-    //         expect(formatTimestamp(inputTime, 'US/Central')).toBe(expectedOutput);
-    //         done();
-    //     });
-    //     // YOUR CODE HERE
-    // });
+    describe('format timestamp', () => {
+        test('it returns a formatted timestamp', (done) => {
+            const inputTime = '2020-07-01T16:03:18.021Z'
+            const expectedOutput = 'July 1st, 2020 at 11:03 am';
+            expect(formatTimestamp(inputTime, 'US/Central')).toBe(expectedOutput);
+            done();
+        });
+        test('it returns a formatted timestamp when input is day after in UST time', (done) => {
+            const inputTime = '2020-07-02T02:03:18.021Z'
+            const expectedOutput = 'July 1st, 2020 at 7:03 pm';
+            expect(formatTimestamp(inputTime, 'America/Los_Angeles')).toBe(expectedOutput);
+            done();
+        });
+        
+    });
 });
