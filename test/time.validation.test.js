@@ -41,12 +41,12 @@ describe('time validation', () => {
             done();
         });
         test('it returns false if passed a time 30 seconds ago', (done) => {
-            const timestamp = moment().subtract(40, 's');
+            const timestamp = moment().subtract(30, 's');
             expect(closeToNow(timestamp)).toBe(false);
             done();
         });
         test('it returns false if passed a time 30 seconds in the future', (done) => {
-            const timestamp = moment().add(40, 's');
+            const timestamp = moment().add(30, 's');
             expect(closeToNow(timestamp)).toBe(false);
             done();
         });
