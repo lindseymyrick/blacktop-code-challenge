@@ -24,7 +24,7 @@ function closeToNow(timestamp) {
  * Returns the previous days date if before 12pm CST or the
  * date of the timestamp if after 12pm CST. 
  * 
- * Input: '2020-07-01T16:03:18.021Z' -> output: '2020-06-30'
+ * Input: '2020-07-01T16:03:18.021Z' -> output: '2020-06-30', 
  * Input: '2020-07-01T17:03:18.021Z' -> output: '2020-07-01'
  * Input: '2020-07-01T12:03:18.021-05:00' -> output: '2020-07-01'
  * 
@@ -32,7 +32,14 @@ function closeToNow(timestamp) {
  * @returns {String} calulated date in the format 'YYYY-MM-DD'
  */
 function closestDate(timestamp) {
-    // YOUR CODE HERE
+    //converts from other time zones to CST
+    timestampCST = moment(timestamp).tz('America/Chicago').format('H')
+    if (timestampCST < 12) {
+        return 'smaller'
+    } else {
+        return 'bigger'
+    }
+  
 }
 
 /**

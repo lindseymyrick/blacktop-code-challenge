@@ -25,7 +25,7 @@ describe('time validation', () => {
             expect(closeToNow(timestamp)).toBe(true);
             done();
         });
-        test('it returns false if passed a time ten years ago', (done) => {
+        test('it returns false if passed a stringified time ten years ago', (done) => {
             const timestamp = '2010-07-01T16:03:18.021Z'; 
             expect(closeToNow(timestamp)).toBe(false);
             done();
@@ -42,15 +42,30 @@ describe('time validation', () => {
         });
        
     });
-    // describe('closest date', () => {
-    //     test('it returns the previous day if before noon CST', (done) => {
-    //         const inputTime = '2020-07-01T16:03:18.021Z'
-    //         const expectedOutput = '2020-06-30';
-    //         expect(closestDate(inputTime)).toBe(expectedOutput);
-    //         done();
-    //     });
-    //     // YOUR CODE HERE
-    // });
+    describe('closest date', () => {
+        test('it returns the previous day if before noon CST (UST time)', (done) => {
+            const inputTime = '2020-07-01T16:03:18.021Z'
+            const expectedOutput = 'smaller';
+            // const expectedOutput = '2020-06-30';
+            expect(closestDate(inputTime)).toBe(expectedOutput);
+            done();
+        });
+        test('it returns the previous day if before noon CST', (done) => {
+            const inputTime = '2020-07-01T17:03:18.021Z'
+            const expectedOutput = 'bigger';
+            // const expectedOutput = '2020-06-30';
+            expect(closestDate(inputTime)).toBe(expectedOutput);
+            done();
+        });
+        test('it returns the previous day if before noon CST', (done) => {
+            const inputTime = '2020-07-01T12:03:18.021-05:00'
+            const expectedOutput = 'bigger';
+            // const expectedOutput = '2020-06-30';
+            expect(closestDate(inputTime)).toBe(expectedOutput);
+            done();
+        });
+        // YOUR CODE HERE
+    });
     // describe('format timestamp', () => {
     //     test('it returns a formatted timestamp', (done) => {
     //         const inputTime = '2020-07-01T16:03:18.021Z'
