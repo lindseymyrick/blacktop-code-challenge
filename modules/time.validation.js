@@ -33,11 +33,11 @@ function closeToNow(timestamp) {
  */
 function closestDate(timestamp) {
     //converts from other time zones to CST
-    timestampCST = moment(timestamp).tz('America/Chicago').format('H')
-    if (timestampCST < 12) {
-        return 'smaller'
+    timeStampCST = moment(timestamp).tz('America/Chicago').format('H')
+    if (timeStampCST < 12) {
+        return moment(timestamp).tz('America/Chicago').subtract(1,'d').format("YYYY-MM-DD");
     } else {
-        return 'bigger'
+        return moment(timestamp).format("YYYY-MM-DD");
     }
   
 }

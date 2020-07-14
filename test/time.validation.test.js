@@ -45,22 +45,19 @@ describe('time validation', () => {
     describe('closest date', () => {
         test('it returns the previous day if before noon CST (UST time)', (done) => {
             const inputTime = '2020-07-01T16:03:18.021Z'
-            const expectedOutput = 'smaller';
-            // const expectedOutput = '2020-06-30';
+            const expectedOutput = '2020-06-30';
             expect(closestDate(inputTime)).toBe(expectedOutput);
             done();
         });
         test('it returns the previous day if before noon CST', (done) => {
             const inputTime = '2020-07-01T17:03:18.021Z'
-            const expectedOutput = 'bigger';
-            // const expectedOutput = '2020-06-30';
+            const expectedOutput = '2020-07-01';
             expect(closestDate(inputTime)).toBe(expectedOutput);
             done();
         });
         test('it returns the previous day if before noon CST', (done) => {
             const inputTime = '2020-07-01T12:03:18.021-05:00'
-            const expectedOutput = 'bigger';
-            // const expectedOutput = '2020-06-30';
+            const expectedOutput = '2020-07-01';
             expect(closestDate(inputTime)).toBe(expectedOutput);
             done();
         });
